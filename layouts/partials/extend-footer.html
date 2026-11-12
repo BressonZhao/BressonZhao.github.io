@@ -1,0 +1,52 @@
+<script>
+  (function () {
+    var root = document.getElementById("project-tag-filter");
+    if (!root) return;
+    var cards = Array.prototype.slice.call(document.querySelectorAll("article.article-link--card"));
+    var tagSet = [];
+    cards.forEach(function (card) {
+      var tags = [];
+      card.querySelectorAll('a[href*="/tags/"]').forEach(function (link) {
+        var name = (link.textContent || "").replace(/\s+/g, " ").trim();
+        if (!name) return;
+        if (tags.indexOf(name) === -1) tags.push(name);
+        if (tagSet.indexOf(name) === -1) tagSet.push(name);
+      });
+      card.setAttribute("data-tags", tags.join("\n"));
+    });
+
+    function apply(active) {
+      cards.forEach(function (card) {
+        var tags = (card.getAttribute("data-tags") || "").split("\n");
+        var show = !active || tags.indexOf(active) !== -1;
+        card.style.display = show ? "" : "none";
+      });
+    }
+
+    if (!tagSet.length) {
+      var empty = document.createElement("p");
+      empty.className = "project-tag-empty";
+      empty.textContent = root.getAttribute("data-empty") || "TODO(Bresson)";
+      root.appendChild(empty);
+      return;
+    }
+
+    function makeButton(label, value, pressed) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = label;
+      btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+      btn.addEventListener("click", function () {
+        root.querySelectorAll("button").forEach(function (other) {
+          other.setAttribute("aria-pressed", "false");
+        });
+        btn.setAttribute("aria-pressed", "true");
+        apply(value);
+      });
+      root.appendChild(btn);
+    }
+
+    makeButton(root.getAttribute("data-all") || "All", "", true);
+    tagSet.forEach(function (tag) { makeButton(tag, tag, false); });
+  })();
+</script>

@@ -1,0 +1,67 @@
+# Bresson site v1.
+# baseURL is the production GitHub Pages root URL.
+# No analytics, comments, or ad services.
+
+theme = "blowfish"
+baseURL = "https://bressonzhao.github.io/"
+defaultContentLanguage = "zh-cn"
+defaultContentLanguageInSubdir = false
+
+enableRobotsTXT = true
+summaryLength = 40
+hasCJKLanguage = true
+buildDrafts = false
+buildFuture = false
+enableEmoji = true
+pluralizeListTitles = false
+
+[pagination]
+  pagerSize = 10
+
+[imaging]
+  anchor = "Center"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.twitter]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true
+
+[related]
+  threshold = 0
+  toLower = false
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 80
+
+  [[related.indices]]
+    name = "date"
+    weight = 10

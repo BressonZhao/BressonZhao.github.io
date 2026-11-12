@@ -1,0 +1,77 @@
+{{- $featured := slice -}}
+{{- range where site.RegularPages "Section" "projects" -}}
+  {{- if .Params.featured -}}
+    {{- $featured = $featured | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $featured = first 3 $featured.ByWeight -}}
+
+{{- $posts := where site.RegularPages "Section" "blog" -}}
+{{- if eq (len $posts) 0 -}}
+  {{- with hugo.Sites.Default -}}
+    {{- $posts = where .RegularPages "Section" "blog" -}}
+  {{- end -}}
+{{- end -}}
+{{- $posts = first 3 $posts.ByDate.Reverse -}}
+
+{{- $papers := hugo.Data.papers | default slice -}}
+{{- $latest := first 3 $papers -}}
+
+<section class="home-block">
+  <div class="home-block__head">
+    <h2>{{ i18n "home_featured_projects" }}</h2>
+    <a href="{{ "projects/" | relLangURL }}">{{ i18n "home_view_all" }}</a>
+  </div>
+  {{ if gt (len $featured) 0 }}
+    <div class="home-grid">
+      {{ range $featured }}
+        {{ partial "article-link/card.html" . }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="home-empty">{{ i18n "home_none" }}</p>
+  {{ end }}
+</section>
+
+<section class="home-block">
+  <div class="home-block__head">
+    <h2>{{ i18n "home_latest_papers" }}</h2>
+    <a href="{{ "papers/" | relLangURL }}">{{ i18n "home_view_all" }}</a>
+  </div>
+  {{ if gt (len $latest) 0 }}
+    <ul class="home-papers">
+      {{ range $latest }}
+        <li>
+          <a class="home-paper-link" href="{{ printf "papers/#%s" .id | relLangURL }}">
+            {{ with .venue_abbr }}<span class="paper-venue">{{ . }}</span>{{ end }}
+            <span>{{ .title }}</span>
+          </a>
+          <p class="home-paper-meta">
+            {{ with .authors }}{{ partial "paper-authors.html" . }}{{ end }}
+            {{ with .status }}
+              <span class="paper-status">{{ i18n (printf "papers_status_%s" .) | default . }}</span>
+            {{ end }}
+          </p>
+        </li>
+      {{ end }}
+    </ul>
+  {{ else }}
+    <p class="home-empty">{{ i18n "home_none" }}</p>
+  {{ end }}
+</section>
+
+<section class="home-block">
+  <div class="home-block__head">
+    <h2>{{ i18n "home_recent_posts" }}</h2>
+    <a href="{{ "blog/" | relLangURL }}">{{ i18n "home_view_all" }}</a>
+  </div>
+  {{ if gt (len $posts) 0 }}
+    <div class="home-posts">
+      {{ range $posts }}
+        {{ partial "article-link/simple.html" . }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="home-empty">{{ i18n "home_none" }}</p>
+  {{ end }}
+</section>

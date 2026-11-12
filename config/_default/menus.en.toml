@@ -1,0 +1,29 @@
+[[main]]
+  name = "Projects"
+  pageRef = "projects"
+  weight = 10
+
+[[main]]
+  name = "Papers"
+  pageRef = "papers"
+  weight = 20
+
+[[main]]
+  name = "Blog"
+  pageRef = "blog"
+  weight = 30
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 40
+
+[[footer]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 10
+
+[[footer]]
+  name = "Categories"
+  pageRef = "categories"
+  weight = 20

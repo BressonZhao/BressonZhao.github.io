@@ -1,0 +1,44 @@
+- id: home_featured_projects
+  translation: "Featured projects"
+- id: home_latest_papers
+  translation: "Latest papers"
+- id: home_recent_posts
+  translation: "Recent posts"
+- id: home_view_all
+  translation: "View all"
+- id: home_none
+  translation: "TODO(Bresson)"
+- id: papers_selected_only
+  translation: "Selected only"
+- id: papers_abs
+  translation: "Abs"
+- id: papers_bib
+  translation: "Bib"
+- id: papers_pdf
+  translation: "PDF"
+- id: papers_code
+  translation: "Code"
+- id: papers_doi
+  translation: "DOI"
+- id: papers_copy
+  translation: "Copy"
+- id: papers_copied
+  translation: "Copied"
+- id: papers_none_selected
+  translation: "No selected papers. TODO(Bresson)"
+- id: papers_status_under_review
+  translation: "Under Review"
+- id: papers_status_published
+  translation: "Published"
+- id: papers_status_preprint
+  translation: "Preprint"
+- id: project_role
+  translation: "Role"
+- id: project_status
+  translation: "Status"
+- id: project_stack
+  translation: "Stack"
+- id: project_repo
+  translation: "Repository"
+- id: project_demo
+  translation: "Demo"

@@ -1,0 +1,29 @@
+[[main]]
+  name = "项目"
+  pageRef = "projects"
+  weight = 10
+
+[[main]]
+  name = "论文"
+  pageRef = "papers"
+  weight = 20
+
+[[main]]
+  name = "博客"
+  pageRef = "blog"
+  weight = 30
+
+[[main]]
+  name = "关于"
+  pageRef = "about"
+  weight = 40
+
+[[footer]]
+  name = "标签"
+  pageRef = "tags"
+  weight = 10
+
+[[footer]]
+  name = "分类"
+  pageRef = "categories"
+  weight = 20

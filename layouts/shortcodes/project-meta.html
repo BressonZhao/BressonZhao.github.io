@@ -1,0 +1,45 @@
+{{- $links := .Page.Params.links -}}
+<dl class="project-meta">
+  <div>
+    <dt>{{ i18n "project_role" }}</dt>
+    <dd>{{ .Page.Params.role | default "TODO(Bresson)" }}</dd>
+  </div>
+  <div>
+    <dt>{{ i18n "project_status" }}</dt>
+    <dd>{{ .Page.Params.status | default "TODO(Bresson)" }}</dd>
+  </div>
+  <div>
+    <dt>{{ i18n "project_stack" }}</dt>
+    <dd>
+      {{- with .Page.Params.stack -}}
+        {{ delimit . "、" }}
+      {{- else -}}
+        TODO(Bresson)
+      {{- end -}}
+    </dd>
+  </div>
+  <div>
+    <dt>{{ i18n "project_repo" }}</dt>
+    <dd>
+      {{- $repo := "" -}}
+      {{- with $links }}{{ with .repo }}{{ $repo = printf "%v" . }}{{ end }}{{ end -}}
+      {{- if and $repo (not (in $repo "TODO(Bresson)")) (or (hasPrefix $repo "http://") (hasPrefix $repo "https://")) -}}
+        <a href="{{ $repo }}">{{ $repo }}</a>
+      {{- else -}}
+        TODO(Bresson)
+      {{- end -}}
+    </dd>
+  </div>
+  <div>
+    <dt>{{ i18n "project_demo" }}</dt>
+    <dd>
+      {{- $demo := "" -}}
+      {{- with $links }}{{ with .demo }}{{ $demo = printf "%v" . }}{{ end }}{{ end -}}
+      {{- if and $demo (not (in $demo "TODO(Bresson)")) (or (hasPrefix $demo "http://") (hasPrefix $demo "https://")) -}}
+        <a href="{{ $demo }}">{{ $demo }}</a>
+      {{- else -}}
+        TODO(Bresson)
+      {{- end -}}
+    </dd>
+  </div>
+</dl>

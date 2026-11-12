@@ -1,0 +1,64 @@
+{{ define "main" }}
+  <header>
+    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+  </header>
+  <div class="prose dark:prose-invert mt-4 mb-6 max-w-prose">
+    {{ .Content }}
+  </div>
+
+  <div class="paper-toolbar">
+    <label class="paper-selected-toggle" for="papers-selected-only">
+      <input id="papers-selected-only" type="checkbox">
+      <span>{{ i18n "papers_selected_only" }}</span>
+    </label>
+  </div>
+
+  <div class="papers-list">
+    {{- $rows := slice -}}
+    {{- range $i, $paper := (hugo.Data.papers | default slice) -}}
+      {{- $sortKey := 0 -}}
+      {{- $label := "TODO(Bresson)" -}}
+      {{- with $paper.year -}}
+        {{- $sortKey = int . -}}
+        {{- $label = printf "%v" . -}}
+      {{- end -}}
+      {{- $tie := sub 999 $i -}}
+      {{- if lt $tie 0 }}{{ $tie = 0 }}{{ end -}}
+      {{- $composite := add (mul $sortKey 1000) $tie -}}
+      {{- $rows = $rows | append (dict "sortKey" $composite "label" $label "paper" $paper) -}}
+    {{- end -}}
+    {{- $rows = sort $rows "sortKey" "desc" -}}
+    {{- $prev := "" -}}
+    {{- range $row := $rows -}}
+      {{- if ne $row.label $prev -}}
+        {{- if ne $prev "" }}</section>{{ end -}}
+        <section class="paper-year">
+          <h2>{{ $row.label }}</h2>
+        {{- $prev = $row.label -}}
+      {{- end -}}
+      {{ partial "paper-item.html" $row.paper }}
+    {{- end -}}
+    {{- if gt (len $rows) 0 }}</section>{{ end -}}
+  </div>
+  <p class="papers-filter-empty">{{ i18n "papers_none_selected" }}</p>
+
+  <script>
+    (function () {
+      document.querySelectorAll("[data-paper-copy]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var node = document.getElementById(btn.getAttribute("data-paper-copy"));
+          if (!node) return;
+          var text = node.innerText;
+          var previous = btn.textContent;
+          var done = function () {
+            btn.textContent = btn.getAttribute("data-copied-label") || previous;
+            window.setTimeout(function () { btn.textContent = previous; }, 1500);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done).catch(function () {});
+          }
+        });
+      });
+    })();
+  </script>
+{{ end }}

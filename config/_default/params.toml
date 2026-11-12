@@ -1,0 +1,102 @@
+# Theme behaviour. Analytics, comments, ads, and support widgets stay off.
+
+colorScheme = "ocean"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+enableStructuredBreadcrumbs = false
+
+replyByEmail = false
+mainSections = ["blog"]
+
+disableImageOptimization = false
+disableTextInHeader = false
+hotlinkFeatureImage = false
+
+highlightCurrentMenuArea = true
+smartTOC = true
+smartTOCHideUnfocusedChildren = false
+
+fingerprintAlgorithm = "sha512"
+
+[languageRedirect]
+  enabled = false
+
+[header]
+  layout = "basic"
+  mobileMenuStyle = "dropdown"
+
+[footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = true
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[homepage]
+  layout = "profile"
+  layoutSwitcher = false
+  showRecent = false
+  showRecentItems = 3
+  showMoreLink = false
+  cardView = false
+  cardViewScreenWidth = false
+  layoutBackgroundBlur = false
+
+[article]
+  showDate = true
+  showViews = false
+  showLikes = false
+  showDateOnlyInArticle = false
+  showDateUpdated = false
+  showAuthor = true
+  showHero = false
+  showBreadcrumbs = false
+  showDraftLabel = true
+  showEdit = false
+  showHeadingAnchors = true
+  showPagination = true
+  showReadingTime = true
+  showReadingProgress = true
+  showTableOfContents = true
+  showRelatedContent = true
+  relatedContentLimit = 3
+  showTaxonomies = true
+  showCategories = true
+  showTags = true
+  showAuthorsBadges = false
+  showWordCount = true
+  showComments = false
+  sharingLinks = []
+  showZenMode = false
+
+[list]
+  showHero = false
+  showBreadcrumbs = false
+  showSummary = false
+  showViews = false
+  showLikes = false
+  showTableOfContents = false
+  showCards = false
+  orderByWeight = false
+  groupByYear = true
+  cardView = false
+  cardViewScreenWidth = false
+  constrainItemsWidth = false
+
+[taxonomy]
+  showTermCount = true
+  showHero = false
+  showBreadcrumbs = false
+  showTableOfContents = false
+  cardView = false
+
+[term]
+  showHero = false
+  showBreadcrumbs = false
+  showTableOfContents = false
+  groupByYear = false
+  cardView = false
+  cardViewScreenWidth = false

@@ -1,0 +1,83 @@
+{{- $paper := . -}}
+{{- $id := $paper.id | default "paper" -}}
+{{- $status := printf "%v" ($paper.status | default "") -}}
+{{- $statusLabel := $status -}}
+{{- if ne $status "" -}}
+  {{- $statusKey := printf "papers_status_%s" $status -}}
+  {{- $translated := i18n $statusKey -}}
+  {{- if and $translated (ne $translated $statusKey) -}}
+    {{- $statusLabel = $translated -}}
+  {{- end -}}
+{{- end -}}
+{{- $selected := "false" -}}
+{{- if $paper.selected }}{{ $selected = "true" }}{{ end -}}
+
+<article class="paper-item" id="{{ $id }}" data-selected="{{ $selected }}">
+  <div class="paper-row">
+    <div class="paper-venue-col">
+      {{ with $paper.venue_abbr }}<span class="paper-venue">{{ . }}</span>{{ end }}
+    </div>
+    <div class="paper-main">
+      <h3 class="paper-title">{{ $paper.title }}</h3>
+      {{ with $paper.authors }}
+        <p class="paper-authors">{{ partial "paper-authors.html" . }}</p>
+      {{ end }}
+      <p class="paper-line">
+        {{ with $paper.venue }}<em class="paper-venue-name">{{ . }}</em>{{ end }}
+        {{ with $paper.year }}<span class="paper-year-inline">{{ . }}</span>{{ end }}
+        {{ if ne $status "" }}
+          <span class="paper-status paper-status--{{ $status }}">{{ $statusLabel }}</span>
+        {{ end }}
+      </p>
+      <div class="paper-actions">
+        {{ with $paper.abstract }}
+          <input class="paper-fold" type="checkbox" id="abs-{{ $id }}">
+          <label class="paper-btn" for="abs-{{ $id }}">{{ i18n "papers_abs" }}</label>
+        {{ end }}
+        {{ with $paper.bibtex }}
+          <input class="paper-fold" type="checkbox" id="bib-{{ $id }}">
+          <label class="paper-btn" for="bib-{{ $id }}">{{ i18n "papers_bib" }}</label>
+        {{ end }}
+        {{ with $paper.pdf }}
+          {{- $href := printf "%v" . -}}
+          {{- if and $href (not (in $href "TODO(Bresson)")) -}}
+            {{- if not (or (hasPrefix $href "http://") (hasPrefix $href "https://")) -}}
+              {{- $href = $href | relURL -}}
+            {{- end -}}
+            <a class="paper-btn" href="{{ $href }}">PDF</a>
+          {{- end -}}
+        {{ end }}
+        {{ with $paper.code }}
+          {{- $href := printf "%v" . -}}
+          {{- if and $href (not (in $href "TODO(Bresson)")) (or (hasPrefix $href "http://") (hasPrefix $href "https://")) -}}
+            <a class="paper-btn" href="{{ $href }}" target="_blank" rel="noopener noreferrer">Code</a>
+          {{- end -}}
+        {{ end }}
+        {{ with $paper.doi }}
+          {{- $href := printf "%v" . -}}
+          {{- if and $href (not (in $href "TODO(Bresson)")) -}}
+            {{- if not (or (hasPrefix $href "http://") (hasPrefix $href "https://")) -}}
+              {{- $href = printf "https://doi.org/%s" $href -}}
+            {{- end -}}
+            <a class="paper-btn" href="{{ $href }}" target="_blank" rel="noopener noreferrer">DOI</a>
+          {{- end -}}
+        {{ end }}
+        {{ with $paper.abstract }}
+          <div class="paper-panel paper-panel--abs">
+            <p>{{ . }}</p>
+          </div>
+        {{ end }}
+        {{ with $paper.bibtex }}
+          <div class="paper-panel paper-panel--bib">
+            <pre class="paper-bib" id="bibtex-{{ $id }}">{{ . }}</pre>
+            <button
+              type="button"
+              class="paper-btn"
+              data-paper-copy="bibtex-{{ $id }}"
+              data-copied-label="{{ i18n "papers_copied" }}">{{ i18n "papers_copy" }}</button>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</article>

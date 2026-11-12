@@ -1,0 +1,32 @@
+# 论文数据源。未知字段留空或写 TODO(Bresson)。
+# 首页「最新论文」按本文件顺序取前 3 条。
+- id: face2health
+  title: Face2Health
+  authors:
+    - Xintao Zhao
+    - "TODO(Bresson): 其他作者"
+  venue: ""
+  venue_abbr: COMPAG
+  status: under_review
+  abstract: "面部图像家畜健康排序。TODO(Bresson)"
+  pdf: ""
+  code: ""
+  doi: ""
+  url: ""
+  bibtex: "TODO(Bresson)"
+  selected: false
+- id: track2health
+  title: Track2Health
+  authors:
+    - Xintao Zhao
+    - "TODO(Bresson): 其他作者"
+  venue: ""
+  venue_abbr: COMPAG
+  status: under_review
+  abstract: "GPS 轨迹家畜健康。TODO(Bresson)"
+  pdf: ""
+  code: ""
+  doi: ""
+  url: ""
+  bibtex: "TODO(Bresson)"
+  selected: false

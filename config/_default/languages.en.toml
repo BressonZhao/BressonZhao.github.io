@@ -1,0 +1,22 @@
+locale = "en"
+label = "English"
+weight = 2
+title = "Bresson"
+
+[params]
+  displayName = "English"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  description = "TODO(Bresson)"
+
+[params.author]
+  name = "Bresson (Xintao Zhao)"
+  image = "img/avatar.svg"
+  headline = "TODO(Bresson)"
+  bio = "TODO(Bresson)"
+  links = [
+    { github = "TODO(Bresson)" },
+    { x-twitter = "TODO(Bresson)" },
+    { email = "TODO(Bresson)" },
+  ]

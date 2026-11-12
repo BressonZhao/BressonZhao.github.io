@@ -1,0 +1,28 @@
+{{ with .Site.Params.Author.links }}
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500 space-x-2">
+    {{ range $links := . }}
+      {{ range $name, $url := $links }}
+        {{ $raw := printf "%v" $url }}
+        {{ $pending := or (in $raw "TODO") (not (or (hasPrefix $raw "http://") (hasPrefix $raw "https://") (hasPrefix $raw "mailto:"))) }}
+        {{ $isEmail := eq $name "email" }}
+        {{ if $pending }}
+          <span
+            class="inline-flex hover:text-primary-700 dark:hover:text-primary-400"
+            aria-label="{{ $name }} TODO(Bresson)"
+            title="TODO(Bresson)"
+            ><span class="inline-block align-text-bottom">{{ partial "icon.html" $name }}</span></span>
+        {{ else }}
+          <a
+            class="{{ cond $isEmail "email-link" "" }} hover:text-primary-700 dark:hover:text-primary-400"
+            href="{{ cond $isEmail "#" ($raw | safeURL) }}"
+            {{ if $isEmail }}data-email="{{ $raw | base64Encode }}"{{ end }}
+            target="_blank"
+            rel="me noopener noreferrer"
+            aria-label="{{ $name | title }}"
+            title="{{ $name | title }}"
+            ><span class="inline-block align-text-bottom">{{ partial "icon.html" $name }}</span></a>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

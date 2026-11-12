@@ -1,0 +1,14 @@
+{{- $authors := . -}}
+{{- range $i, $author := $authors -}}
+  {{- if $i }}, {{ end -}}
+  {{- $name := "Xintao Zhao" -}}
+  {{- if in $author $name -}}
+    {{- $parts := split $author $name -}}
+    {{- range $idx, $part := $parts -}}
+      {{- if $idx }}<strong>{{ $name }}</strong>{{ end -}}
+      {{- $part -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $author -}}
+  {{- end -}}
+{{- end -}}
